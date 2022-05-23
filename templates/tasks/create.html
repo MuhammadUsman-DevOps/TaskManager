@@ -1,0 +1,87 @@
+{% extends 'bases/admin_base.html' %}
+{% load static %}
+{% block title %} Create Task {% endblock title %}
+{% block main_content %}
+    <!-- Main Content -->
+    <div class="hk-pg-wrapper">
+        <!-- Container -->
+        <div class="container-fluid mt-xl-50 mt-sm-30 mt-15">
+            <section class="hk-sec-wrapper">
+                <h5 class="hk-sec-title mb-30">Create Task</h5>
+
+                {#    FORM        #}
+                                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success">{{ message }}</div>
+                            {% endfor %}
+                        {% endif %}
+
+
+                <form method="post" class="needs-validation" novalidate>
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-12 col-md-8">
+                            <label for="firstName">Task Name</label>
+                            <input type="text" class="form-control" id="task_name" name="task_name"
+                                   placeholder="Task Name"
+                                   value="" required>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="start_date" class="mt-10">Start Date</label>
+                                    <input type="date" class="form-control" id="start_date" placeholder="Start Date"
+                                           name="start_date"
+                                           value="">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="due_date" class="mt-10">Due Date</label>
+                                    <input type="date" class="form-control" id="due_date" placeholder="Due Date"
+                                           name="due_date"
+                                           value="">
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                </div>
+                            </div>
+                            <label for="cost" class="mt-10">Cost</label>
+                            <input type="number" min="0" value="0" step=".01" class="form-control" id="cost"
+                                   placeholder="cost"
+                                   name="cost"
+                            >
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+                            <label for="task_desc" class="mt-10">Task Description</label>
+                            <textarea class="form-control" rows="4" cols="8" id="task_desc" name="task_desc"></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="row mt-20 justify-content-end">
+
+
+                            <button class="btn btn-primary" type="submit">Create Task</button>
+
+                        </div>
+                    </div>
+                </form>
+            </section>
+        </div>
+        <!-- /Container -->
+
+    </div>
+    <!-- /Main Content -->
+
+
+{% endblock main_content %}

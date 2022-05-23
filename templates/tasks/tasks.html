@@ -1,0 +1,97 @@
+{% extends 'bases/admin_base.html' %}
+{% load static %}
+{% block title %} All Task {% endblock title %}
+{% block main_content %}
+    <!-- Main Content -->
+    <div class="hk-pg-wrapper">
+        <!-- Container -->
+        <div class="container-fluid mt-xl-50 mt-sm-30 mt-15">
+            <div class="row justify-content-between mb-10">
+                <div class="col-lg-6">
+                    <h3> Tasks</h3>
+                </div>
+                <div class="col-lg-6 text-right">
+                    <a href="{% url 'create_task' %}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Add New</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12">
+                    <section class="hk-sec-wrapper">
+                        <div class="row">
+                            <div class="col-sm">
+                                <div class="table-wrap">
+                                    <table id="datable_3" class="table table-striped w-100  pb-30">
+                                        <thead>
+                                        <tr>
+                                            <th>Task Name</th>
+                                            <th>Task Description</th>
+                                            <th>Start Date</th>
+                                            <th>Due Date</th>
+                                            <th>Cost</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for task in tasks %}
+                                            <tr>
+                                                <td>
+                                                    {{ task.task_name }}
+                                                </td>
+                                                <td>{{ task.task_desc }}</td>
+                                                <td>{{ task.start_date }}</td>
+                                                <td>{{ task.due_date }}</td>
+                                                <td>
+                                                    {% if task.cost %}
+                                                        {{ task.cost }}
+                                                    {% else %}
+                                                        $0
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    {% if task.is_completed %}
+                                                        <span class="badge badge-success mt-15 mr-10">Completed</span>
+                                                    {% else %}
+                                                        <span class="badge badge-warning mt-15 mr-10">Pending</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>
+                                                    <div class="inline-block dropdown">
+                                                        <a class="dropdown-toggle no-caret" data-toggle="dropdown"
+                                                           href="#" aria-expanded="false" role="button">
+                                                            <i class="icon-options-vertical"></i>
+                                                        </a>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+                                                            <a class="dropdown-item"
+                                                               href="{% url 'mark_completed' task.pk %}"><i
+                                                                    class="fa fa-edit"></i>
+                                                                Mark Completed</a>
+                                                            <a class="dropdown-item"
+                                                               href="{% url 'delete_task' task.pk %}"><i
+                                                                    class="fa fa-remove"></i>
+                                                                Delete</a>
+
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                </div>
+            </div>
+        </div>
+        <!-- /Container -->
+
+
+    </div>
+    <!-- /Main Content -->
+{% endblock main_content %}
